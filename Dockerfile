@@ -31,7 +31,7 @@ COPY --from=builder /usr/local/bin/filebrowser /filebrowser
 RUN mkdir -p -m 777 /config \
     && mkdir -p -m 777 /data
 
-EXPOSE 8080
+EXPOSE 4500
 
 ENTRYPOINT ["/filebrowser"]
 CMD ["--root=/data", "--address=0.0.0.0", "--database=/config/filebrowser.db"]
