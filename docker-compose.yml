@@ -7,7 +7,7 @@ services:
     env_file:
       - stack.env
     ports:
-      - '3003:3003'
+      - '4500:4500'
     networks:
       - proxy_default
     labels:
