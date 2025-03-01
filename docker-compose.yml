@@ -1,0 +1,25 @@
+services:
+  s3obosoftit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    pull_policy: build
+    env_file:
+      - stack.env
+    ports:
+      - '3003:3003'
+    networks:
+      - proxy_default
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.s3obosoftit.rule=Host(`s3.obosoft.it`)'
+      - 'traefik.http.routers.s3obosoftit.entrypoints=websecure'
+      - 'traefik.http.routers.s3obosoftit.tls.certresolver=myresolver'
+      - 'traefik.http.services.s3obosoftit.loadbalancer.server.port=4500'
+      - 'traefik.docker.network=proxy_default'
+      - "traefik.http.middlewares.s3obosoftit.headers.sslredirect=true"
+    restart: always
+ 
+networks:
+  proxy_default:
+    external: true
